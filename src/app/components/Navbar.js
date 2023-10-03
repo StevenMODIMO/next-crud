@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const session = await getServerSession();
   return (
     <main className="shadow font-light">
       <header className="flex justify-between m-2 p-2">
@@ -15,9 +17,17 @@ export default function Navbar() {
           />
         </Link>
         <div className="flex gap-3 text-xl">
-          <Link href="/crud">Crud</Link>
-          <Link href="/auth/signup">Signup</Link>
-          <Link href="/auth/login">Login</Link>
+          {session?.user ? (
+            <>
+              <Link href="/crud">Crud</Link>
+              <button>Sign Out</button>
+            </>
+          ) : (
+            <>
+              <Link href="/auth/signup">Signup</Link>
+              <Link href="/auth/login">Login</Link>
+            </>
+          )}
         </div>
       </header>
     </main>

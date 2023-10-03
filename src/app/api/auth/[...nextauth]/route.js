@@ -1,27 +1,46 @@
-import User from "@/models/userModel"
-import { dbConnect } from "@/lib/db"
-import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
+import User from "@/models/userModel";
+import { dbConnect } from "@/lib/db";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google"
 
 const handler = NextAuth({
-    session: {
-        strategy: "jwt"
+  session: {
+    strategy: "jwt",
+  },
+  providers: [
+    CredentialsProvider({
+      type: "credentials",
+      credentials: {},
+      async authorize(credentials) {
+        const { email, password } = credentials;
+        await dbConnect();
+        const user = await User.login(email, password);
+        return user;
+      },
+    }),
+    GoogleProvider({
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        authorization: { params: { scope: "profile"}},
+        profile(profile) {
+            console.log(profile)
+        }
+    })
+  ],
+  pages: {
+    signIn: "/auth/login",
+  },
+  callbacks: {
+    async jwt({ token, user, session }) {
+      token.id = user.id;
+      return token;
     },
-    providers: [
-        CredentialsProvider({
-            type: "credentials",
-            credentials: {},
-            async authorize(credentials, req) {
-                const { email, password } = credentials
-                await dbConnect()
-                const user = await User.login(email, password)
-                return user
-            }
-        })
-    ],
-    pages: {
-        signIn: "/auth/login"
-    }
-})
+    async session({ session, token, user }) {
+      session.user.id = token.id;
+      return session;
+    },
+  },
+});
 
 export { handler as GET, handler as POST };
