@@ -6,7 +6,7 @@ export default function Cruds() {
 
   useEffect(() => {
     const getCruds = async () => {
-      const res = await fetch("/api/crud");
+      const res = await fetch("/api/crud", { cache: "no-store"});
       const json = await res.json();
       if (json.error) {
         console.log(json.error);

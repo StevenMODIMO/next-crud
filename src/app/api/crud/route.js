@@ -30,39 +30,9 @@ async function handler(req) {
       }
       break;
 
-    case "PUT":
-      try {
-        const body = await req.json();
-        const title = body.title;
-        const crud = body.crud;
-        const id = body.id;
-        const updated = await Crud.findOneAndUpdate(
-          { _id: id },
-          { title: title, crud: crud },
-          { new: true }
-        );
-        return NextResponse.json(updated);
-      } catch (error) {
-        return NextResponse.json(error);
-      }
-      break;
-
-    case "DELETE":
-      try {
-        const body = await req.json();
-        const title = body.title;
-        const crud = body.crud;
-        const id = body.id;
-        const deleteCrud = await Crud.findOneAndDelete({ title });
-        return NextResponse.json(deleteCrud);
-      } catch (error) {
-        return NextResponse.json(error);
-      }
-      break;
-
     default:
       return NextResponse.json({ error: "Could not process reequest." });
   }
 }
 
-export { handler as GET, handler as POST, handler as PUT, handler as DELETE };
+export { handler as GET, handler as POST };
