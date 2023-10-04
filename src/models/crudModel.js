@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const crudSchema = new mongoose.Schema({
   title: String,
   crud: String,
+  created_by: String
 });
 
 crudSchema.statics.createCrud = async function (title, crud) {
