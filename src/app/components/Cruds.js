@@ -22,7 +22,7 @@ export default function Cruds() {
         <h1>Cruds You Added.</h1>
       </header>
       <section className="grid grid-cols-2 gap-2">
-        {cruds.map((crud) => {
+        {cruds?.map((crud) => {
           return (
             <main key={crud._id} className="shadow p-2 m-2 bg-white">
               <h1 className="text-center font-semibold">{crud.title}</h1>
