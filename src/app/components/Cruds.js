@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Cruds() {
   const [cruds, setCruds] = useState([]);
@@ -45,7 +46,7 @@ export default function Cruds() {
               <div className="text-start">{crud.crud}</div>
               <div className="font-light text-xs">{crud._id}</div>
               <div className="flex justify-between m-2">
-                <button className="bg-gray-100 p-1 rounded shadow">Edit</button>
+                <Link href={`/edit/${crud._id}`} className="bg-gray-100 p-1 rounded shadow">Edit</Link>
                 <button className="bg-gray-100 p-1 rounded shadow" onClick={() => deleteCrud(crud._id)}>Delete</button>
               </div>
             </main>

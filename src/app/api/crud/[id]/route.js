@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 async function handler(req, { params }) {
   const { method } = req;
-  const id = params.id
+  const id = params.id;
   await dbConnect();
 
   switch (method) {
@@ -27,7 +27,16 @@ async function handler(req, { params }) {
     case "DELETE":
       try {
         const deleteCrud = await Crud.findOneAndDelete({ _id: id });
-        return NextResponse.json(deleteCrud);
+        return NextResponse.json({ status: "ok" });
+      } catch (error) {
+        return NextResponse.json(error);
+      }
+      break;
+
+    case "GET":
+      try {
+        const crud = await Crud.findOne({ _id: id });
+        return NextResponse.json(crud);
       } catch (error) {
         return NextResponse.json(error);
       }
@@ -38,4 +47,4 @@ async function handler(req, { params }) {
   }
 }
 
-export { handler as PUT, handler as DELETE };
+export { handler as PUT, handler as DELETE, handler as GET };

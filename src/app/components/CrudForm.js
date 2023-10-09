@@ -30,12 +30,13 @@ export default function CrudForm() {
       setLoading(false);
       setTitle("");
       setCrud("");
-    } else {
+    } 
       setLoading(false);
       setTitle("");
       setCrud("");
+      setError(null)
       router.refresh()
-    }
+    
   };
   return (
     <main className="bg-green-50 rounded shadow">
