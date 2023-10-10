@@ -1,4 +1,5 @@
 import EditForm from "@/app/components/EditForm";
+import Modal from "@/app/components/Modal/Modal";
 
 export default async function Edit({ params }) {
   async function getCrud(id) {
@@ -12,8 +13,10 @@ export default async function Edit({ params }) {
 
   const crud = await getCrud(params.id);
   return (
-    <main>
-      <EditForm title={crud.title} crud={crud.crud} id={crud._id} />
-    </main>
+    <Modal>
+      <main>
+        <EditForm title={crud.title} crud={crud.crud} id={crud._id} />
+      </main>
+    </Modal>
   );
 }

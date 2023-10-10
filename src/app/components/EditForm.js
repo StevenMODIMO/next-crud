@@ -30,7 +30,7 @@ export default function EditForm({ title, crud, id }) {
       <form className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
-            for="title"
+            htmlFor="title"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             Title
@@ -46,7 +46,7 @@ export default function EditForm({ title, crud, id }) {
 
         <div className="mb-4">
           <label
-            for="crud"
+            htmlFor="crud"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             CRUD
