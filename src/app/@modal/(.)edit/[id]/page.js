@@ -3,7 +3,7 @@ import Modal from "@/app/components/Modal/Modal";
 
 export default async function Edit({ params }) {
   async function getCrud(id) {
-    const res = await fetch(`http://localhost:3000/api/crud/${id}`);
+    const res = await fetch(`http://localhost:3000/api/crud/${id}`, { cache: "no-store"});
     if (!res.ok) {
       console.log(res);
     }

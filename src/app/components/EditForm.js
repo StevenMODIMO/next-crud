@@ -20,7 +20,7 @@ export default function EditForm({ title, crud, id }) {
     const json = await res.json()
 
     if(res.ok) {
-        router.push("/crud")
+        router.back()
     } else {
         console.log(json.error)
     }
