@@ -29,7 +29,6 @@ export default function LoginForm() {
       setPassword("");
       setLoading(false);
     } else {
-      console.log(res);
       setEmail("");
       setPassword("");
       setLoading(false);

@@ -2,7 +2,7 @@ import User from "@/models/userModel";
 import { dbConnect } from "@/lib/db";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google"
+import GoogleProvider from "next-auth/providers/google";
 
 const handler = NextAuth({
   session: {
@@ -20,25 +20,35 @@ const handler = NextAuth({
       },
     }),
     GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        authorization: { params: { scope: "profile"}},
-        profile(profile) {
-            console.log(profile)
-        }
-    })
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: { params: { scope: "profile" } },
+      profile(profile) {
+        console.log(profile);
+      },
+    }),
   ],
   pages: {
     signIn: "/auth/login",
   },
   callbacks: {
     async jwt({ token, user, session }) {
-      token.id = user.id;
+      if(user) {
+        return {
+          ...token,
+          id: user.id,
+        }
+      }
       return token;
     },
     async session({ session, token, user }) {
-      session.user.id = token.id;
-      return session;
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.sub
+        }
+      }
     },
   },
 });
