@@ -1,9 +1,9 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import Navbar from "./components/Navbar";
 import { NextAuthProvider } from "./components/AuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Montserrat({ subsets: ['cyrillic']});
 
 export const metadata = {
   title: "Create Next App",

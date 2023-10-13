@@ -2,13 +2,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function CrudForm() {
+  const { data, status } = useSession()
   const [title, setTitle] = useState("");
   const [crud, setCrud] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,13 +33,12 @@ export default function CrudForm() {
       setLoading(false);
       setTitle("");
       setCrud("");
-    } 
+    } else {
       setLoading(false);
       setTitle("");
       setCrud("");
-      setError(null)
-      router.refresh()
-    
+      setError(null);
+    }
   };
   return (
     <main className="bg-green-50 rounded shadow">
