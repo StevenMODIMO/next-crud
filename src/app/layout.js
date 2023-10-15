@@ -14,7 +14,7 @@ export default function RootLayout({ children, modal }) {
   return (
     <NextAuthProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${inter.className}  bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200`}>
           <Navbar />
           {children}
           {modal}
