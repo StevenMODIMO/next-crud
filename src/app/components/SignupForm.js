@@ -33,7 +33,7 @@ export default function SignupForm() {
   };
 
   return (
-    <main className="shadow-lg p-4 h-[80%] bg-gradient-to-b from-green-100 from-10%">
+    <main className="shadow-lg p-4 h-[80%] bg-white">
       <header className="text-center text-xl">
         <h1>Sign Up to Get Started</h1>
       </header>

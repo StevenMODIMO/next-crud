@@ -75,7 +75,7 @@ export default function Navbar() {
 
 const NavLinks = ({ isAuth, data, show, setShow }) => {
   return (
-    <motion.div animate={{ x: show ? 0 : -800 }} className="absolute bg-black/60 p-2 h-[500px] w-full sm:hidden">
+    <motion.div animate={{ x: show ? 0 : -800 }} className="absolute bg-black/60 p-2 h-screen w-full sm:hidden">
       {isAuth ? (
         <>
           <div>{data.user.id}</div>
@@ -115,7 +115,7 @@ const NavLinks = ({ isAuth, data, show, setShow }) => {
           </Link>
         </>
       )}
-      <div>&copy; copyright next-crud 2023</div>
+      <div className="text-white">&copy; copyright next-crud 2023</div>
     </motion.div>
   );
 };
