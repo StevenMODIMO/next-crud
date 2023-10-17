@@ -8,7 +8,7 @@ export default function Home() {
           Your Daily Todo's At hand.
         </h1>
       </header>
-      <section className="">
+      <section>
         <div className="bg-black text-white rounded m-4 w-fit p-4 text-center">
           Get Started
         </div>
@@ -19,6 +19,9 @@ export default function Home() {
           CTA.
         </div>
       </section>
+      <div className="text-black text-center">
+        &copy; copyright next-crud 2023
+      </div>
     </main>
   );
 }

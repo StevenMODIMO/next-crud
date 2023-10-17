@@ -35,7 +35,7 @@ export default function Navbar() {
           </div>
         </section>
         <NavLinks isAuth={isAuth} data={data} show={show} setShow={setShow} />
-        <div className="hidden">
+        <div className="hidden sm:flex">
           {isAuth ? (
             <>
               <div>{data.user.id}</div>
