@@ -33,11 +33,11 @@ const handler = NextAuth({
   },
   callbacks: {
     async jwt({ token, user, session }) {
-      if(user) {
+      if (user) {
         return {
           ...token,
           id: user.id,
-        }
+        };
       }
       return token;
     },
@@ -46,9 +46,14 @@ const handler = NextAuth({
         ...session,
         user: {
           ...session.user,
-          id: token.sub
-        }
-      }
+          id: token.sub,
+        },
+      };
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
   },
 });
